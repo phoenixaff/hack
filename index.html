@@ -3,229 +3,398 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HackBot - Estrategias para Crash</title>
-    
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1831955754419707'); // Reemplaza con tu ID real
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1831955754419707&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
-    
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;900&display=swap" rel="stylesheet">
+    <title>Bot Predictor para Aviator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #6e48aa;
-            --secondary: #9d50bb;
-            --accent: #f1c40f;
-        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: #121212;
-            color: white;
-            overflow-x: hidden;
+            background: linear-gradient(135deg, #0c0e2a, #1a1c3a, #25284a);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
         }
-        .brand {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            background: rgba(0,0,0,0.5);
-            border-radius: 50px;
-            backdrop-filter: blur(5px);
-            animation: fadeIn 1s ease;
-            transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .brand:hover {
-            background: rgba(0,0,0,0.7);
-            transform: translateY(-2px);
-        }
+        
         .container {
-            max-width: 100%;
-            padding: 0 20px;
+            width: 100%;
+            max-width: 500px;
+            background: rgba(20, 22, 45, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(101, 119, 209, 0.3);
+            overflow: hidden;
+            position: relative;
         }
-        header {
-            height: 80vh;
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .header h1 {
+            color: #fff;
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(66, 139, 202, 0.5);
+            background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header p {
+            color: rgba(200, 200, 220, 0.8);
+            font-size: 16px;
+        }
+        
+        .plane-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            display: block;
+            color: #ff6b6b;
+            animation: fly 3s infinite ease-in-out;
+        }
+        
+        .bet-container {
+            background: rgba(30, 33, 65, 0.4);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid rgba(101, 119, 209, 0.2);
+        }
+        
+        .bet-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #d1daff;
+        }
+        
+        .bet-amount {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .bet-count {
+            font-size: 18px;
+        }
+        
+        .signal-box {
+            background: rgba(15, 18, 45, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            min-height: 120px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(30, 30, 30, 0.7), rgba(30, 30, 30, 0.7)), 
-                        url('https://image.winudf.com/v2/image1/cHQuZGV2LmF2aWF0b3JnYW1lX3NjcmVlbl8wXzE2Mzk1NjI1NTdfMDAy/screen-0.jpg?fakeurl=1&type=.jpg') no-repeat center center;
-            background-size: cover;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            padding: 0 20px;
             position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(101, 119, 209, 0.2);
         }
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            text-shadow: 3px 3px 5px rgba(0,0,0,0.8);
-            animation: fadeIn 1s ease;
+        
+        .signal {
+            font-size: 42px;
+            font-weight: bold;
+            color: #4cff4c;
+            text-shadow: 0 0 15px rgba(76, 255, 76, 0.7);
+            margin: 10px 0;
+            transition: all 0.5s ease;
         }
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            text-shadow: 2px 2px 3px rgba(0,0,0,0.8);
-            animation: fadeIn 1s ease 0.3s forwards;
+        
+        .signal-label {
+            color: rgba(200, 200, 220, 0.8);
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .generate-btn {
+            background: linear-gradient(to right, #ff5252, #ff7b7b);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(255, 82, 82, 0.5);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 82, 82, 0.7);
+            background: linear-gradient(to right, #ff7b7b, #ff5252);
+        }
+        
+        .generate-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .generate-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
             opacity: 0;
         }
-        .btn {
-            display: inline-block;
-            background: var(--accent);
-            color: #121212;
-            padding: 15px 40px;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-            animation: pulse 2s infinite;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        
+        .generate-btn:hover::before {
+            opacity: 1;
+            animation: shine 1.5s infinite;
         }
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+        
+        .error-message {
+            background: rgba(255, 0, 0, 0.2);
+            border-left: 4px solid #ff4d4d;
+            color: #ffcccc;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+            animation: shake 0.5s ease;
         }
-        .features {
+        
+        .radar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid rgba(76, 255, 76, 0.5);
+            position: relative;
+            margin: 20px auto;
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            padding: 50px 0;
+            align-items: center;
         }
-        .feature {
-            flex: 0 0 250px;
-            margin: 15px;
-            padding: 30px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+        
+        .radar::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(76, 255, 76, 0.3);
+            animation: pulse 2s infinite;
         }
-        .feature:hover {
-            transform: translateY(-10px);
-            background: rgba(255,255,255,0.1);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        
+        .radar-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4cff4c, transparent);
+            transform-origin: center;
+            animation: rotate 3s infinite linear;
         }
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-        .feature-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        .cta {
-            text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(to right, #2c3e50, #4ca1af);
-            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
-        }
+        
         .disclaimer {
+            color: rgba(200, 200, 220, 0.6);
+            font-size: 12px;
             text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
-            opacity: 0.7;
+            margin-top: 25px;
         }
-
-        /* Animaciones */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        .pulse-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #4cff4c;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #4cff4c;
+            animation: pulse 2s infinite;
         }
+        
+        @keyframes fly {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        @keyframes signalGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(76, 255, 76, 0.7); }
+            50% { text-shadow: 0 0 20px rgba(76, 255, 76, 1); }
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        
+        .signal.glow {
+            animation: signalGlow 2s infinite;
+        }
+        
+        .dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+        
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
-    <a href="#" class="brand">Carlos Gutiérrez 💸</a>
-
     <div class="container">
-        <header>
-            <h1>HACKBOT</h1>
-            <p class="subtitle">Sistema avanzado para juegos crash</p>
-            <a href="https://t.me/Carlos_dinerobot?start=link_q5aYBfIH1H" class="btn" onclick="fbq('track', 'Lead');">Obtener ahora</a>
-        </header>
-
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">⏳</div>
-                <h3 class="feature-title">Análisis en vivo</h3>
-                <p>Datos precisos en tiempo real</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">⚙️</div>
-                <h3 class="feature-title">Predicciones automatizadas</h3>
-                <p>Basado en algoritmos avanzados</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🛡️</div>
-                <h3 class="feature-title">100% seguro</h3>
-                <p>Uso completamente anónimo</p>
+        <div class="header">
+            <i class="fas fa-plane plane-icon"></i>
+            <h1>Bot Predictor para Aviator</h1>
+            <p>Sistema avanzado de predicción para el juego Aviator</p>
+            <div class="dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
             </div>
         </div>
-
-        <div class="cta">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">¿Listo para ganar?</h2>
-            <a href="https://t.me/Carlos_dinerobot?start=link_q5aYBfIH1H" class="btn" onclick="fbq('track', 'Purchase', {currency: 'USD', value: 0.00});">Descargar en Telegram</a>
+        
+        <div class="bet-container">
+            <div class="bet-info">
+                <div class="bet-amount">Apuesta Máx: <span>5 BOB</span></div>
+                <div class="bet-count">Apuestas: <span id="betCount">0</span>/3</div>
+            </div>
+            
+            <div class="radar">
+                <div class="radar-line"></div>
+                <div class="pulse-dot"></div>
+            </div>
+            
+            <div class="signal-box">
+                <div class="signal-label">Próxima Predicción</div>
+                <div class="signal" id="prediction">1.00x</div>
+                <div class="signal-label">Multiplicador</div>
+            </div>
+            
+            <button class="generate-btn" id="generateBtn">
+                <i class="fas fa-bolt"></i> Generar Señal
+            </button>
+            
+            <div class="error-message" id="errorMessage">
+                <strong><i class="fas fa-exclamation-triangle"></i> Error de Sincronización!</strong> Por favor, contacte al administrador.
+            </div>
         </div>
-
-        <p class="disclaimer">Advertencia: Este producto es solo para mayores de 18 años. Las ganancias no están garantizadas.</p>
+        
+        <div class="disclaimer">
+            Esta es solo una herramienta de simulación. Las predicciones se generan aleatoriamente y no están garantizadas.
+        </div>
     </div>
 
     <script>
-        // Efecto de aparición gradual al hacer scroll
-        const features = document.querySelectorAll('.feature');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        features.forEach(feature => {
-            feature.style.opacity = 0;
-            feature.style.transform = 'translateY(20px)';
-            feature.style.transition = 'all 0.6s ease';
-            observer.observe(feature);
-        });
-
-        // Track button clicks
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                fbq('track', 'Lead');
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generateBtn');
+            const predictionElement = document.getElementById('prediction');
+            const betCountElement = document.getElementById('betCount');
+            const errorMessage = document.getElementById('errorMessage');
+            const radar = document.querySelector('.radar');
+            
+            let betCount = 0;
+            let canGenerate = true;
+            
+            generateBtn.addEventListener('click', function() {
+                if (!canGenerate) return;
+                
+                // Add click animation
+                this.classList.add('active');
+                setTimeout(() => {
+                    this.classList.remove('active');
+                }, 100);
+                
+                // Generate random coefficient between 1.10 and 1.40
+                const coefficient = (Math.random() * 0.3 + 1.1).toFixed(2);
+                
+                // Show loading state
+                predictionElement.textContent = '...';
+                predictionElement.classList.remove('glow');
+                
+                // Speed up radar animation during "processing"
+                radar.style.animationDuration = '0.5s';
+                
+                // Simulate processing delay
+                setTimeout(() => {
+                    predictionElement.textContent = coefficient + 'x';
+                    predictionElement.classList.add('glow');
+                    
+                    betCount++;
+                    betCountElement.textContent = betCount;
+                    
+                    // Return radar to normal speed
+                    setTimeout(() => {
+                        radar.style.animationDuration = '2s';
+                    }, 500);
+                    
+                    // Check if we've reached 3 bets
+                    if (betCount >= 3) {
+                        canGenerate = false;
+                        
+                        // Show error after a delay
+                        setTimeout(() => {
+                            errorMessage.style.display = 'block';
+                            
+                            // Disable button
+                            generateBtn.style.opacity = '0.7';
+                            generateBtn.style.cursor = 'not-allowed';
+                            generateBtn.innerHTML = '<i class="fas fa-ban"></i> Desactivado';
+                        }, 1000);
+                    }
+                }, 1500);
             });
         });
     </script>
